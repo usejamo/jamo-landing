@@ -15,11 +15,16 @@ const HeroSection = () => {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <div className="h-14 w-48 mx-auto overflow-hidden">
+          <div className="h-16 w-56 mx-auto overflow-hidden relative">
             <img
               src={jamoLogo}
               alt="Jamo"
-              className="h-full w-auto object-cover object-left scale-[2] origin-left"
+              className="absolute top-1/2 left-0 -translate-y-1/2"
+              style={{
+                width: "200%",
+                maxWidth: "none",
+                clipPath: "inset(25% 52% 25% 5%)",
+              }}
             />
           </div>
         </motion.div>
