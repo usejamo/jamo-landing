@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import FluidBackground from "./FluidBackground";
+import jamoLogo from "@/assets/jamo-logo-dark.png";
 
 const HeroSection = () => {
   return (
@@ -14,9 +15,7 @@ const HeroSection = () => {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <span className="text-lg font-semibold tracking-[0.3em] uppercase text-foreground/80">
-            Jamo
-          </span>
+          <img src={jamoLogo} alt="Jamo" className="h-10 mx-auto" />
         </motion.div>
 
         {/* Tagline */}
