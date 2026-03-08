@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import FluidBackground from "./FluidBackground";
-import jamoIcon from "@/assets/jamo-icon.png";
 
 const HeroSection = () => {
   return (
@@ -8,20 +7,6 @@ const HeroSection = () => {
       <FluidBackground />
 
       <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-        {/* Logo */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-12"
-        >
-          <div className="flex items-center justify-center gap-3">
-            <img src={jamoIcon} alt="Jamo icon" className="h-12 w-auto" />
-            <span className="text-3xl font-medium text-foreground" style={{ fontFamily: "'Geist', 'Inter', sans-serif" }}>
-              jamo
-            </span>
-          </div>
-        </motion.div>
 
         {/* Tagline */}
         <motion.h1
