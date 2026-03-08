@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { useMemo, useEffect, useState } from "react";
+import { useMemo, useEffect, useState, useRef, useCallback } from "react";
 
 interface NodeData {
   id: number;
@@ -7,24 +7,38 @@ interface NodeData {
   startY: number;
   size: number;
   color: string;
-  duration: number;
-  delay: number;
+  driftDuration: number;
   driftX: number;
   driftY: number;
 }
 
-const NetworkNode = ({ node, onPositionUpdate }: { node: NodeData; onPositionUpdate: (id: number, x: number, y: number) => void }) => {
+interface Connection {
+  id: number;
+  from: number;
+  to: number;
+  duration: number;
+}
+
+const NetworkNode = ({
+  node,
+  visible,
+  onPositionUpdate,
+}: {
+  node: NodeData;
+  visible: boolean;
+  onPositionUpdate: (id: number, x: number, y: number) => void;
+}) => {
   const x = useMotionValue(node.startX);
   const y = useMotionValue(node.startY);
 
   useEffect(() => {
     const animX = animate(x, [node.startX, node.startX + node.driftX, node.startX - node.driftX * 0.5, node.startX], {
-      duration: node.duration,
+      duration: node.driftDuration,
       repeat: Infinity,
       ease: "easeInOut",
     });
     const animY = animate(y, [node.startY, node.startY + node.driftY, node.startY - node.driftY * 0.5, node.startY], {
-      duration: node.duration * 1.1,
+      duration: node.driftDuration * 1.1,
       repeat: Infinity,
       ease: "easeInOut",
     });
@@ -42,67 +56,114 @@ const NetworkNode = ({ node, onPositionUpdate }: { node: NodeData; onPositionUpd
         width: `${node.size}px`,
         height: `${node.size}px`,
         background: node.color,
-        left: useTransform(x, v => `${v}%`),
-        top: useTransform(y, v => `${v}%`),
+        left: useTransform(x, (v) => `${v}%`),
+        top: useTransform(y, (v) => `${v}%`),
         boxShadow: node.size > 3 ? `0 0 8px ${node.color}` : undefined,
       }}
-      animate={{ opacity: [0.3, 0.8, 0.5, 0.7, 0.3] }}
-      transition={{ duration: node.duration, repeat: Infinity, ease: "easeInOut", delay: node.delay }}
+      animate={{ opacity: visible ? [0, 0.8, 0.8] : [0.8, 0, 0] }}
+      transition={{ duration: 0.6, ease: "easeInOut" }}
     />
   );
 };
 
 const FluidBackground = () => {
   const nodes = useMemo<NodeData[]>(() => {
-    return Array.from({ length: 50 }, (_, i) => ({
+    return Array.from({ length: 60 }, (_, i) => ({
       id: i,
       startX: 5 + Math.random() * 90,
       startY: 10 + Math.random() * 80,
       size: i % 7 === 0 ? 4 : i % 4 === 0 ? 3 : 2,
       color: i % 3 === 0 ? "hsl(0 100% 71%)" : "hsl(220 60% 70%)",
-      duration: 12 + Math.random() * 10,
-      delay: Math.random() * 5,
+      driftDuration: 14 + Math.random() * 10,
       driftX: 2 + Math.random() * 4,
       driftY: 2 + Math.random() * 4,
     }));
   }, []);
 
-  const connectionPairs = useMemo(() => {
-    const pairs: [number, number][] = [];
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const dx = nodes[i].startX - nodes[j].startX;
-        const dy = nodes[i].startY - nodes[j].startY;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 18 && pairs.length < 30) {
-          pairs.push([i, j]);
-        }
-      }
-    }
-    return pairs;
-  }, [nodes]);
+  // Track which dots are currently visible
+  const [visibleSet, setVisibleSet] = useState<Set<number>>(() => {
+    const s = new Set<number>();
+    nodes.forEach((n) => { if (Math.random() > 0.3) s.add(n.id); });
+    return s;
+  });
 
+  // Random dot visibility cycling
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisibleSet((prev) => {
+        const next = new Set(prev);
+        // Toggle 3-5 random dots each cycle
+        const count = 3 + Math.floor(Math.random() * 3);
+        for (let i = 0; i < count; i++) {
+          const id = Math.floor(Math.random() * nodes.length);
+          if (next.has(id)) next.delete(id);
+          else next.add(id);
+        }
+        return next;
+      });
+    }, 800);
+    return () => clearInterval(interval);
+  }, [nodes.length]);
+
+  // Live positions for connections
+  const posRef = useRef<Record<number, { x: number; y: number }>>({});
   const [positions, setPositions] = useState<Record<number, { x: number; y: number }>>(() => {
     const init: Record<number, { x: number; y: number }> = {};
-    nodes.forEach(n => { init[n.id] = { x: n.startX, y: n.startY }; });
+    nodes.forEach((n) => { init[n.id] = { x: n.startX, y: n.startY }; });
     return init;
   });
 
-  const handlePositionUpdate = useMemo(() => {
-    let buffer: Record<number, { x: number; y: number }> = {};
-    let rafId: number | null = null;
+  useEffect(() => {
+    nodes.forEach((n) => { posRef.current[n.id] = { x: n.startX, y: n.startY }; });
+  }, [nodes]);
 
-    return (id: number, x: number, y: number) => {
-      buffer[id] = { x, y };
-      if (!rafId) {
-        rafId = requestAnimationFrame(() => {
-          setPositions(prev => ({ ...prev, ...buffer }));
-          buffer = {};
-          rafId = null;
-        });
-      }
-    };
+  const handlePositionUpdate = useCallback((id: number, x: number, y: number) => {
+    posRef.current[id] = { x, y };
   }, []);
+
+  // Sync positions to state at 15fps for SVG rendering
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPositions({ ...posRef.current });
+    }, 66);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Random connections that appear and disappear
+  const connIdRef = useRef(0);
+  const [connections, setConnections] = useState<Connection[]>([]);
+
+  useEffect(() => {
+    const spawnConnection = () => {
+      const visibleIds = Array.from(visibleSet);
+      if (visibleIds.length < 2) return;
+
+      const from = visibleIds[Math.floor(Math.random() * visibleIds.length)];
+      let to = from;
+      let attempts = 0;
+      while (to === from && attempts < 10) {
+        to = visibleIds[Math.floor(Math.random() * visibleIds.length)];
+        attempts++;
+      }
+      if (to === from) return;
+
+      const duration = 1 + Math.random() * 2; // 1-3 seconds
+      const id = connIdRef.current++;
+
+      setConnections((prev) => [...prev, { id, from, to, duration }]);
+
+      setTimeout(() => {
+        setConnections((prev) => prev.filter((c) => c.id !== id));
+      }, duration * 1000);
+    };
+
+    // Spawn a new connection every 300-600ms
+    const interval = setInterval(spawnConnection, 300 + Math.random() * 300);
+    // Initial burst
+    for (let i = 0; i < 8; i++) setTimeout(spawnConnection, i * 200);
+
+    return () => clearInterval(interval);
+  }, [visibleSet]);
 
   return (
     <div className="absolute inset-0 overflow-hidden">
@@ -166,21 +227,24 @@ const FluidBackground = () => {
         transition={{ duration: 38, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Live connection lines */}
+      {/* Live random connection lines */}
       <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: "none" }}>
-        {connectionPairs.map(([i, j], idx) => {
-          const p1 = positions[i];
-          const p2 = positions[j];
+        {connections.map((conn) => {
+          const p1 = positions[conn.from];
+          const p2 = positions[conn.to];
           if (!p1 || !p2) return null;
           return (
-            <line
-              key={idx}
+            <motion.line
+              key={conn.id}
               x1={`${p1.x}%`}
               y1={`${p1.y}%`}
               x2={`${p2.x}%`}
               y2={`${p2.y}%`}
-              stroke="hsl(0 100% 71% / 0.15)"
+              stroke="hsl(0 100% 71% / 0.18)"
               strokeWidth="1"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 0.5, 0.3, 0] }}
+              transition={{ duration: conn.duration, ease: "easeInOut" }}
             />
           );
         })}
@@ -188,7 +252,12 @@ const FluidBackground = () => {
 
       {/* Animated nodes */}
       {nodes.map((node) => (
-        <NetworkNode key={node.id} node={node} onPositionUpdate={handlePositionUpdate} />
+        <NetworkNode
+          key={node.id}
+          node={node}
+          visible={visibleSet.has(node.id)}
+          onPositionUpdate={handlePositionUpdate}
+        />
       ))}
 
       {/* Subtle grid overlay */}
