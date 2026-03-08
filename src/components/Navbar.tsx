@@ -8,7 +8,7 @@ const Navbar = () => {
         <div className="flex items-center" style={{ gap: "4px" }}>
           <img src={jamoIcon} alt="Jamo icon" className="h-11 w-auto" />
           <span className="text-2xl font-semibold text-foreground" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.07em" }}>
-            jamo
+            Jamo
           </span>
         </div>
 
