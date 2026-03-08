@@ -27,10 +27,10 @@ const HowItWorks = () => {
     <section className="relative bg-[hsl(var(--navy-deep))] py-24 md:py-32">
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         className="text-center mb-16 md:mb-20"
       >
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -48,10 +48,10 @@ const HowItWorks = () => {
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: i * 0.2, ease: "easeOut" }}
               className="flex flex-col items-center text-center relative"
             >
               {/* Numbered icon */}
