@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import FluidBackground from "./FluidBackground";
-import jamoLogo from "@/assets/jamo-logo-dark.png";
+import jamoLogo from "@/assets/jamo-logo.jpeg";
 
 const HeroSection = () => {
   return (
@@ -15,7 +15,18 @@ const HeroSection = () => {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <img src={jamoLogo} alt="Jamo" className="h-10 mx-auto" />
+          <div className="h-16 w-56 mx-auto overflow-hidden relative">
+            <img
+              src={jamoLogo}
+              alt="Jamo"
+              className="absolute top-1/2 left-0 -translate-y-1/2"
+              style={{
+                width: "200%",
+                maxWidth: "none",
+                clipPath: "inset(25% 52% 25% 5%)",
+              }}
+            />
+          </div>
         </motion.div>
 
         {/* Tagline */}
