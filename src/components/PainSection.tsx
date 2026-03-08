@@ -1,4 +1,4 @@
-import brokenProcessImg from "@/assets/broken-process.png";
+import TangledWorkflow from "./TangledWorkflow";
 
 const pains = [
   {
@@ -46,13 +46,9 @@ const PainSection = () => {
           ))}
         </div>
 
-        {/* Right: abstract graphic */}
+        {/* Right: tangled workflow SVG */}
         <div className="flex items-center justify-center md:justify-end order-last">
-          <img
-            src={brokenProcessImg}
-            alt="Abstract illustration of fragmented, tangled documents representing broken processes"
-            className="w-full max-w-md rounded-2xl"
-          />
+          <TangledWorkflow className="w-full max-w-md" />
         </div>
       </div>
     </section>
