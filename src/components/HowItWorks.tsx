@@ -23,7 +23,7 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="relative bg-[hsl(var(--navy-deep))] py-24 md:py-32">
+    <section className="relative bg-background py-24 md:py-32">
       <div className="text-center mb-16 md:mb-20">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
           How it Works
