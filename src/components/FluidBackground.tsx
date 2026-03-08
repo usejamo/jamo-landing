@@ -38,7 +38,7 @@ const FluidBackground = () => {
 
       {/* Third blob */}
       <motion.div
-        className="absolute w-[400px] h-[400px] rounded-full opacity-[0.04]"
+        className="absolute w-[450px] h-[450px] rounded-full opacity-[0.09]"
         style={{
           background: "radial-gradient(circle, hsl(350 80% 65%) 0%, transparent 70%)",
           top: "50%",
