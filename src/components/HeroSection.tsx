@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import FluidBackground from "./FluidBackground";
-import jamoLogo from "@/assets/jamo-logo.jpeg";
+import jamoIcon from "@/assets/jamo-icon.png";
 
 const HeroSection = () => {
   return (
