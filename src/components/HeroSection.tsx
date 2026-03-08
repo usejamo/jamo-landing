@@ -15,7 +15,13 @@ const HeroSection = () => {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <img src={jamoLogo} alt="Jamo" className="h-10 mx-auto" />
+          <div className="h-14 w-48 mx-auto overflow-hidden">
+            <img
+              src={jamoLogo}
+              alt="Jamo"
+              className="h-full w-auto object-cover object-left scale-[2] origin-left"
+            />
+          </div>
         </motion.div>
 
         {/* Tagline */}
