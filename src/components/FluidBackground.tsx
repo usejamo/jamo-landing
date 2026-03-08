@@ -22,7 +22,7 @@ const FluidBackground = () => {
 
       {/* Secondary blue blob */}
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full opacity-[0.05]"
+        className="absolute w-[550px] h-[550px] rounded-full opacity-[0.1]"
         style={{
           background: "radial-gradient(circle, hsl(220 80% 60%) 0%, transparent 70%)",
           top: "30%",
