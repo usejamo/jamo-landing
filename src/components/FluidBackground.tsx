@@ -5,7 +5,7 @@ const FluidBackground = () => {
     <div className="absolute inset-0 overflow-hidden">
       {/* Large coral blob */}
       <motion.div
-        className="absolute w-[600px] h-[600px] rounded-full opacity-[0.07]"
+        className="absolute w-[700px] h-[700px] rounded-full opacity-[0.15]"
         style={{
           background: "radial-gradient(circle, hsl(0 100% 71%) 0%, transparent 70%)",
           top: "10%",
