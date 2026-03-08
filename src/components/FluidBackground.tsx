@@ -5,7 +5,7 @@ const FluidBackground = () => {
     <div className="absolute inset-0 overflow-hidden">
       {/* Large coral blob */}
       <motion.div
-        className="absolute w-[600px] h-[600px] rounded-full opacity-[0.07]"
+        className="absolute w-[700px] h-[700px] rounded-full opacity-[0.15]"
         style={{
           background: "radial-gradient(circle, hsl(0 100% 71%) 0%, transparent 70%)",
           top: "10%",
@@ -22,7 +22,7 @@ const FluidBackground = () => {
 
       {/* Secondary blue blob */}
       <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full opacity-[0.05]"
+        className="absolute w-[550px] h-[550px] rounded-full opacity-[0.1]"
         style={{
           background: "radial-gradient(circle, hsl(220 80% 60%) 0%, transparent 70%)",
           top: "30%",
@@ -38,7 +38,7 @@ const FluidBackground = () => {
 
       {/* Third blob */}
       <motion.div
-        className="absolute w-[400px] h-[400px] rounded-full opacity-[0.04]"
+        className="absolute w-[450px] h-[450px] rounded-full opacity-[0.09]"
         style={{
           background: "radial-gradient(circle, hsl(350 80% 65%) 0%, transparent 70%)",
           top: "50%",
@@ -53,12 +53,14 @@ const FluidBackground = () => {
       />
 
       {/* Particle dots */}
-      {Array.from({ length: 30 }).map((_, i) => (
+      {Array.from({ length: 45 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-[2px] h-[2px] rounded-full"
+          className="absolute rounded-full"
           style={{
-            background: i % 3 === 0 ? "hsl(0 100% 71% / 0.4)" : "hsl(220 60% 70% / 0.3)",
+            width: i % 5 === 0 ? "3px" : "2px",
+            height: i % 5 === 0 ? "3px" : "2px",
+            background: i % 3 === 0 ? "hsl(0 100% 71% / 0.5)" : "hsl(220 60% 70% / 0.4)",
             top: `${10 + Math.random() * 80}%`,
             left: `${5 + Math.random() * 90}%`,
           }}
