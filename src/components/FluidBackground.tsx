@@ -138,28 +138,35 @@ const FluidBackground = () => {
       const visibleIds = Array.from(visibleSet);
       if (visibleIds.length < 2) return;
 
-      const from = visibleIds[Math.floor(Math.random() * visibleIds.length)];
-      let to = from;
-      let attempts = 0;
-      while (to === from && attempts < 10) {
-        to = visibleIds[Math.floor(Math.random() * visibleIds.length)];
-        attempts++;
-      }
-      if (to === from) return;
+      // Pick a random visible dot
+      const fromId = visibleIds[Math.floor(Math.random() * visibleIds.length)];
+      const fromPos = posRef.current[fromId];
+      if (!fromPos) return;
 
-      const duration = 1 + Math.random() * 2; // 1-3 seconds
+      // Find nearby visible dots (within 15% screen distance)
+      const nearby = visibleIds.filter((id) => {
+        if (id === fromId) return false;
+        const p = posRef.current[id];
+        if (!p) return false;
+        const dx = fromPos.x - p.x;
+        const dy = fromPos.y - p.y;
+        return Math.sqrt(dx * dx + dy * dy) < 15;
+      });
+
+      if (nearby.length === 0) return;
+      const toId = nearby[Math.floor(Math.random() * nearby.length)];
+
+      const duration = 2;
       const id = connIdRef.current++;
 
-      setConnections((prev) => [...prev, { id, from, to, duration }]);
+      setConnections((prev) => [...prev, { id, from: fromId, to: toId, duration }]);
 
       setTimeout(() => {
         setConnections((prev) => prev.filter((c) => c.id !== id));
       }, duration * 1000);
     };
 
-    // Spawn a new connection every 300-600ms
-    const interval = setInterval(spawnConnection, 300 + Math.random() * 300);
-    // Initial burst
+    const interval = setInterval(spawnConnection, 400);
     for (let i = 0; i < 8; i++) setTimeout(spawnConnection, i * 200);
 
     return () => clearInterval(interval);
