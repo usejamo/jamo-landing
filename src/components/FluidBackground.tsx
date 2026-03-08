@@ -1,53 +1,112 @@
-import { motion } from "framer-motion";
-import { useMemo } from "react";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { useMemo, useEffect, useState } from "react";
 
-interface Node {
+interface NodeData {
   id: number;
-  x: number;
-  y: number;
+  startX: number;
+  startY: number;
   size: number;
   color: string;
   duration: number;
   delay: number;
+  driftX: number;
+  driftY: number;
 }
 
+const NetworkNode = ({ node, onPositionUpdate }: { node: NodeData; onPositionUpdate: (id: number, x: number, y: number) => void }) => {
+  const x = useMotionValue(node.startX);
+  const y = useMotionValue(node.startY);
+
+  useEffect(() => {
+    const animX = animate(x, [node.startX, node.startX + node.driftX, node.startX - node.driftX * 0.5, node.startX], {
+      duration: node.duration,
+      repeat: Infinity,
+      ease: "easeInOut",
+    });
+    const animY = animate(y, [node.startY, node.startY + node.driftY, node.startY - node.driftY * 0.5, node.startY], {
+      duration: node.duration * 1.1,
+      repeat: Infinity,
+      ease: "easeInOut",
+    });
+
+    const unsub1 = x.on("change", (v) => onPositionUpdate(node.id, v, y.get()));
+    const unsub2 = y.on("change", (v) => onPositionUpdate(node.id, x.get(), v));
+
+    return () => { animX.stop(); animY.stop(); unsub1(); unsub2(); };
+  }, []);
+
+  return (
+    <motion.div
+      className="absolute rounded-full"
+      style={{
+        width: `${node.size}px`,
+        height: `${node.size}px`,
+        background: node.color,
+        left: useTransform(x, v => `${v}%`),
+        top: useTransform(y, v => `${v}%`),
+        boxShadow: node.size > 3 ? `0 0 8px ${node.color}` : undefined,
+      }}
+      animate={{ opacity: [0.3, 0.8, 0.5, 0.7, 0.3] }}
+      transition={{ duration: node.duration, repeat: Infinity, ease: "easeInOut", delay: node.delay }}
+    />
+  );
+};
+
 const FluidBackground = () => {
-  const nodes = useMemo<Node[]>(() => {
+  const nodes = useMemo<NodeData[]>(() => {
     return Array.from({ length: 50 }, (_, i) => ({
       id: i,
-      x: 5 + Math.random() * 90,
-      y: 10 + Math.random() * 80,
+      startX: 5 + Math.random() * 90,
+      startY: 10 + Math.random() * 80,
       size: i % 7 === 0 ? 4 : i % 4 === 0 ? 3 : 2,
       color: i % 3 === 0 ? "hsl(0 100% 71%)" : "hsl(220 60% 70%)",
-      duration: 3 + Math.random() * 4,
+      duration: 12 + Math.random() * 10,
       delay: Math.random() * 5,
+      driftX: 2 + Math.random() * 4,
+      driftY: 2 + Math.random() * 4,
     }));
   }, []);
 
-  const connections = useMemo(() => {
-    const lines: { x1: number; y1: number; x2: number; y2: number; delay: number }[] = [];
+  const connectionPairs = useMemo(() => {
+    const pairs: [number, number][] = [];
     for (let i = 0; i < nodes.length; i++) {
       for (let j = i + 1; j < nodes.length; j++) {
-        const dx = nodes[i].x - nodes[j].x;
-        const dy = nodes[i].y - nodes[j].y;
+        const dx = nodes[i].startX - nodes[j].startX;
+        const dy = nodes[i].startY - nodes[j].startY;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 18 && lines.length < 30) {
-          lines.push({
-            x1: nodes[i].x,
-            y1: nodes[i].y,
-            x2: nodes[j].x,
-            y2: nodes[j].y,
-            delay: Math.random() * 6,
-          });
+        if (dist < 18 && pairs.length < 30) {
+          pairs.push([i, j]);
         }
       }
     }
-    return lines;
+    return pairs;
   }, [nodes]);
+
+  const [positions, setPositions] = useState<Record<number, { x: number; y: number }>>(() => {
+    const init: Record<number, { x: number; y: number }> = {};
+    nodes.forEach(n => { init[n.id] = { x: n.startX, y: n.startY }; });
+    return init;
+  });
+
+  const handlePositionUpdate = useMemo(() => {
+    let buffer: Record<number, { x: number; y: number }> = {};
+    let rafId: number | null = null;
+
+    return (id: number, x: number, y: number) => {
+      buffer[id] = { x, y };
+      if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          setPositions(prev => ({ ...prev, ...buffer }));
+          buffer = {};
+          rafId = null;
+        });
+      }
+    };
+  }, []);
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Large coral blob - moves across the screen */}
+      {/* Large coral blob */}
       <motion.div
         className="absolute w-[800px] h-[800px] rounded-full opacity-[0.22]"
         style={{
@@ -59,10 +118,10 @@ const FluidBackground = () => {
           left: ["35%", "55%", "40%", "50%", "35%"],
           scale: [1, 1.15, 0.95, 1.1, 1],
         }}
-        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Secondary blue blob - drifts opposite direction */}
+      {/* Secondary blue blob */}
       <motion.div
         className="absolute w-[600px] h-[600px] rounded-full opacity-[0.15]"
         style={{
@@ -74,10 +133,10 @@ const FluidBackground = () => {
           left: ["15%", "30%", "10%", "25%", "15%"],
           scale: [1, 1.2, 1.05, 1.15, 1],
         }}
-        transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 50, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Third warm blob - roams lower right */}
+      {/* Third warm blob */}
       <motion.div
         className="absolute w-[500px] h-[500px] rounded-full opacity-[0.14]"
         style={{
@@ -89,10 +148,10 @@ const FluidBackground = () => {
           right: ["5%", "20%", "10%", "25%", "5%"],
           scale: [1, 1.25, 0.9, 1.2, 1],
         }}
-        transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 45, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Fourth accent blob - subtle teal */}
+      {/* Fourth accent blob */}
       <motion.div
         className="absolute w-[400px] h-[400px] rounded-full opacity-[0.08]"
         style={{
@@ -104,57 +163,32 @@ const FluidBackground = () => {
           left: ["55%", "70%", "60%", "45%", "55%"],
           scale: [1, 1.3, 1, 1.2, 1],
         }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 38, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Connection lines SVG */}
-      <svg className="absolute inset-0 w-full h-full">
-        {connections.map((line, i) => (
-          <motion.line
-            key={i}
-            x1={`${line.x1}%`}
-            y1={`${line.y1}%`}
-            x2={`${line.x2}%`}
-            y2={`${line.y2}%`}
-            stroke="hsl(0 100% 71% / 0.12)"
-            strokeWidth="1"
-            animate={{
-              opacity: [0, 0.4, 0.15, 0.3, 0],
-            }}
-            transition={{
-              duration: 6 + Math.random() * 4,
-              repeat: Infinity,
-              delay: line.delay,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
+      {/* Live connection lines */}
+      <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: "none" }}>
+        {connectionPairs.map(([i, j], idx) => {
+          const p1 = positions[i];
+          const p2 = positions[j];
+          if (!p1 || !p2) return null;
+          return (
+            <line
+              key={idx}
+              x1={`${p1.x}%`}
+              y1={`${p1.y}%`}
+              x2={`${p2.x}%`}
+              y2={`${p2.y}%`}
+              stroke="hsl(0 100% 71% / 0.15)"
+              strokeWidth="1"
+            />
+          );
+        })}
       </svg>
 
-      {/* Particle dots / nodes */}
+      {/* Animated nodes */}
       {nodes.map((node) => (
-        <motion.div
-          key={node.id}
-          className="absolute rounded-full"
-          style={{
-            width: `${node.size}px`,
-            height: `${node.size}px`,
-            background: node.color,
-            boxShadow: node.size > 3 ? `0 0 6px ${node.color}` : undefined,
-          }}
-          animate={{
-            top: [`${node.y}%`, `${node.y + (Math.random() * 6 - 3)}%`, `${node.y}%`],
-            left: [`${node.x}%`, `${node.x + (Math.random() * 6 - 3)}%`, `${node.x}%`],
-            opacity: [0, 0.7, 0.3, 0.6, 0],
-            scale: [0, 1.2, 0.8, 1, 0],
-          }}
-          transition={{
-            duration: node.duration,
-            repeat: Infinity,
-            delay: node.delay,
-            ease: "easeInOut",
-          }}
-        />
+        <NetworkNode key={node.id} node={node} onPositionUpdate={handlePositionUpdate} />
       ))}
 
       {/* Subtle grid overlay */}
