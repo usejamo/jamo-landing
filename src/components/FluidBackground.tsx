@@ -24,7 +24,6 @@ const FluidBackground = () => {
     }));
   }, []);
 
-  // Generate connections between nearby nodes
   const connections = useMemo(() => {
     const lines: { x1: number; y1: number; x2: number; y2: number; delay: number }[] = [];
     for (let i = 0; i < nodes.length; i++) {
@@ -48,53 +47,64 @@ const FluidBackground = () => {
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Large coral blob */}
+      {/* Large coral blob - moves across the screen */}
       <motion.div
-        className="absolute w-[700px] h-[700px] rounded-full opacity-[0.18]"
+        className="absolute w-[800px] h-[800px] rounded-full opacity-[0.22]"
         style={{
           background: "radial-gradient(circle, hsl(0 100% 71%) 0%, transparent 70%)",
-          top: "5%",
-          left: "50%",
-          transform: "translateX(-50%)",
+          filter: "blur(40px)",
         }}
         animate={{
-          scale: [1, 1.2, 1.05, 1.15, 1],
-          x: ["-50%", "-45%", "-55%", "-48%", "-50%"],
-          y: [0, -30, 20, -10, 0],
+          top: ["-5%", "10%", "0%", "15%", "-5%"],
+          left: ["35%", "55%", "40%", "50%", "35%"],
+          scale: [1, 1.15, 0.95, 1.1, 1],
         }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Secondary blue blob */}
+      {/* Secondary blue blob - drifts opposite direction */}
       <motion.div
-        className="absolute w-[550px] h-[550px] rounded-full opacity-[0.12]"
+        className="absolute w-[600px] h-[600px] rounded-full opacity-[0.15]"
         style={{
           background: "radial-gradient(circle, hsl(220 80% 60%) 0%, transparent 70%)",
-          top: "25%",
-          left: "25%",
+          filter: "blur(30px)",
         }}
         animate={{
-          scale: [1, 1.15, 0.95, 1.1, 1],
-          x: [0, 40, -20, 30, 0],
-          y: [0, 20, -40, 10, 0],
+          top: ["20%", "35%", "15%", "40%", "20%"],
+          left: ["15%", "30%", "10%", "25%", "15%"],
+          scale: [1, 1.2, 1.05, 1.15, 1],
         }}
-        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 28, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Third blob */}
+      {/* Third warm blob - roams lower right */}
       <motion.div
-        className="absolute w-[450px] h-[450px] rounded-full opacity-[0.1]"
+        className="absolute w-[500px] h-[500px] rounded-full opacity-[0.14]"
         style={{
           background: "radial-gradient(circle, hsl(350 80% 65%) 0%, transparent 70%)",
-          top: "45%",
-          right: "15%",
+          filter: "blur(30px)",
         }}
         animate={{
-          scale: [1, 1.3, 1, 1.2, 1],
-          x: [0, -30, 20, -10, 0],
-          y: [0, -20, 30, -15, 0],
+          top: ["50%", "35%", "55%", "40%", "50%"],
+          right: ["5%", "20%", "10%", "25%", "5%"],
+          scale: [1, 1.25, 0.9, 1.2, 1],
         }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 24, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Fourth accent blob - subtle teal */}
+      <motion.div
+        className="absolute w-[400px] h-[400px] rounded-full opacity-[0.08]"
+        style={{
+          background: "radial-gradient(circle, hsl(190 70% 55%) 0%, transparent 70%)",
+          filter: "blur(25px)",
+        }}
+        animate={{
+          top: ["60%", "45%", "65%", "50%", "60%"],
+          left: ["55%", "70%", "60%", "45%", "55%"],
+          scale: [1, 1.3, 1, 1.2, 1],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       />
 
       {/* Connection lines SVG */}
@@ -130,11 +140,11 @@ const FluidBackground = () => {
             width: `${node.size}px`,
             height: `${node.size}px`,
             background: node.color,
-            top: `${node.y}%`,
-            left: `${node.x}%`,
             boxShadow: node.size > 3 ? `0 0 6px ${node.color}` : undefined,
           }}
           animate={{
+            top: [`${node.y}%`, `${node.y + (Math.random() * 6 - 3)}%`, `${node.y}%`],
+            left: [`${node.x}%`, `${node.x + (Math.random() * 6 - 3)}%`, `${node.x}%`],
             opacity: [0, 0.7, 0.3, 0.6, 0],
             scale: [0, 1.2, 0.8, 1, 0],
           }}
