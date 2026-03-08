@@ -1,5 +1,17 @@
 import jamoIcon from "@/assets/jamo-icon.png";
 
+const navLinks = [
+  { label: "The Problem", href: "#the-problem" },
+  { label: "How it Works", href: "#how-it-works" },
+  { label: "Request a Demo", href: "#demo" },
+];
+
+const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  e.preventDefault();
+  const el = document.querySelector(href);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
 const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-foreground/[0.08] bg-background/70 backdrop-blur-xl">
@@ -12,10 +24,28 @@ const Navbar = () => {
           </span>
         </div>
 
+        {/* Nav Links - hidden on mobile */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={(e) => handleScroll(e, link.href)}
+              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+
         {/* CTA */}
-        <button className="bg-coral text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:brightness-90">
+        <a
+          href="#demo"
+          onClick={(e) => handleScroll(e, "#demo")}
+          className="bg-coral text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:brightness-90"
+        >
           Request a Demo
-        </button>
+        </a>
       </div>
     </nav>
   );

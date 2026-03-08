@@ -10,7 +10,7 @@ const DemoRequest = () => {
   };
 
   return (
-    <section className="relative bg-background py-24 md:py-32 overflow-hidden">
+    <section id="demo" className="relative bg-background py-24 md:py-32 overflow-hidden scroll-mt-16">
       {/* Coral glow behind header */}
       <div
         className="absolute top-16 left-1/2 -translate-x-1/2 w-[400px] h-[200px] rounded-full pointer-events-none"
