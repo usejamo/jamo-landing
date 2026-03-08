@@ -20,7 +20,7 @@ const pains = [
 
 const PainSection = () => {
   return (
-    <section className="relative bg-background py-24 md:py-32">
+    <section id="the-problem" className="relative bg-background py-24 md:py-32 scroll-mt-16">
       {/* Header */}
       <div className="text-center mb-16 md:mb-20">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
