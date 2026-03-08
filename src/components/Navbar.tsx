@@ -17,12 +17,12 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-foreground/[0.08] bg-background/70 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center" style={{ gap: "4px" }}>
+        <a href="#hero" onClick={(e) => handleScroll(e, "#hero")} className="flex items-center cursor-pointer" style={{ gap: "4px" }}>
           <img src={jamoIcon} alt="Jamo icon" className="h-11 w-auto" />
           <span className="text-2xl font-semibold text-foreground" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.07em" }}>
             Jamo
           </span>
-        </div>
+        </a>
 
         {/* Nav Links - hidden on mobile */}
         <div className="hidden md:flex items-center gap-8">

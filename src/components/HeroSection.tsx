@@ -3,7 +3,7 @@ import FluidBackground from "./FluidBackground";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
       <FluidBackground />
 
       <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
