@@ -6,8 +6,8 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center" style={{ gap: "4px" }}>
-          <img src={jamoIcon} alt="Jamo icon" className="h-8 w-auto" />
-          <span className="text-xl font-medium text-foreground" style={{ fontFamily: "'Geist', 'Inter', sans-serif" }}>
+          <img src={jamoIcon} alt="Jamo icon" className="h-11 w-auto" />
+          <span className="text-2xl font-semibold text-foreground" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.07em" }}>
             jamo
           </span>
         </div>
