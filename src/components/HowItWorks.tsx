@@ -27,10 +27,10 @@ const HowItWorks = () => {
     <section className="relative bg-[hsl(var(--navy-deep))] py-24 md:py-32">
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
         className="text-center mb-16 md:mb-20"
       >
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
