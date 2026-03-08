@@ -43,8 +43,13 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
+      {/* Bottom gradient fade into How it Works */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
+        style={{
+          background: "linear-gradient(to bottom, transparent, hsl(222 47% 4%))",
+        }}
+      />
     </section>
   );
 };
