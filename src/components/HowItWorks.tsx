@@ -1,5 +1,6 @@
 import { Upload, Bot, Send } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const steps = [
   {
@@ -22,14 +23,43 @@ const steps = [
   },
 ];
 
+const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 0.6, delay: index * 0.2, ease: "easeOut" }}
+      className="flex flex-col items-center text-center relative"
+    >
+      <div className="relative z-10 w-28 h-28 rounded-2xl bg-secondary flex flex-col items-center justify-center mb-6 border border-border">
+        <span className="text-xs font-semibold text-primary tracking-widest mb-1">
+          {step.number}
+        </span>
+        <step.icon className="text-primary" size={28} strokeWidth={1.5} />
+      </div>
+      <h3 className="text-lg font-semibold text-foreground mb-2">{step.title}</h3>
+      <p className="text-muted-foreground text-sm leading-relaxed max-w-[260px]">
+        {step.description}
+      </p>
+    </motion.div>
+  );
+};
+
 const HowItWorks = () => {
+  const headerRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, amount: 0.5 });
+
   return (
     <section className="relative bg-[hsl(var(--navy-deep))] py-24 md:py-32">
       {/* Header */}
       <motion.div
+        ref={headerRef}
         initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
+        animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
         className="text-center mb-16 md:mb-20"
       >
@@ -46,32 +76,7 @@ const HowItWorks = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
           {steps.map((step, i) => (
-            <motion.div
-              key={step.number}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: i * 0.2, ease: "easeOut" }}
-              className="flex flex-col items-center text-center relative"
-            >
-              {/* Numbered icon */}
-              <div className="relative z-10 w-28 h-28 rounded-2xl bg-secondary flex flex-col items-center justify-center mb-6 border border-border">
-                <span className="text-xs font-semibold text-primary tracking-widest mb-1">
-                  {step.number}
-                </span>
-                <step.icon className="text-primary" size={28} strokeWidth={1.5} />
-              </div>
-
-              {/* Title */}
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                {step.title}
-              </h3>
-
-              {/* Description */}
-              <p className="text-muted-foreground text-sm leading-relaxed max-w-[260px]">
-                {step.description}
-              </p>
-            </motion.div>
+            <StepCard key={step.number} step={step} index={i} />
           ))}
         </div>
       </div>
