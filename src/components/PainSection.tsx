@@ -51,7 +51,7 @@ const PainSection = () => {
           <img
             src={brokenProcessImg}
             alt="Abstract illustration of fragmented, tangled documents representing broken processes"
-            className="w-full max-w-md opacity-70"
+            className="w-full max-w-md rounded-2xl"
           />
         </div>
       </div>
