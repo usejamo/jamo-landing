@@ -53,12 +53,14 @@ const FluidBackground = () => {
       />
 
       {/* Particle dots */}
-      {Array.from({ length: 30 }).map((_, i) => (
+      {Array.from({ length: 45 }).map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-[2px] h-[2px] rounded-full"
+          className="absolute rounded-full"
           style={{
-            background: i % 3 === 0 ? "hsl(0 100% 71% / 0.4)" : "hsl(220 60% 70% / 0.3)",
+            width: i % 5 === 0 ? "3px" : "2px",
+            height: i % 5 === 0 ? "3px" : "2px",
+            background: i % 3 === 0 ? "hsl(0 100% 71% / 0.5)" : "hsl(220 60% 70% / 0.4)",
             top: `${10 + Math.random() * 80}%`,
             left: `${5 + Math.random() * 90}%`,
           }}
