@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import FluidBackground from "./FluidBackground";
-import MagneticButton from "./MagneticButton";
 
 const HeroSection = () => {
   return (
@@ -8,8 +7,6 @@ const HeroSection = () => {
       <FluidBackground />
 
       <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-
-        {/* Tagline */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -21,7 +18,6 @@ const HeroSection = () => {
           <span className="text-coral">Autopilot</span>
         </motion.h1>
 
-        {/* Subheadline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -31,20 +27,21 @@ const HeroSection = () => {
           Jamo helps CRO business development and proposal teams generate accurate bid proposals in minutes, not days.
         </motion.p>
 
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.6 }}
           className="mt-10"
         >
-          <MagneticButton className="bg-coral text-primary-foreground px-8 py-4 rounded-lg text-base font-semibold transition-all duration-300 hover:brightness-110 hover:scale-[1.02] glow-coral">
+          <a
+            href="#demo"
+            className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg text-base font-semibold transition-all duration-300 hover:brightness-110 hover:scale-[1.02] glow-coral"
+          >
             Request a Demo
-          </MagneticButton>
+          </a>
         </motion.div>
       </div>
 
-      {/* Bottom gradient fade into How it Works */}
       <div
         className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
         style={{
