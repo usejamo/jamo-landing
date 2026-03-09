@@ -22,9 +22,9 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+        className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
         >
-          Jamo helps CRO business development and proposal teams generate accurate bid proposals in minutes, not days.
+          CROs lose weeks to manual proposal work on every RFP that comes in. Jamo uses AI to get you to a sponsor-ready draft in hours, not weeks.
         </motion.p>
 
         <motion.div

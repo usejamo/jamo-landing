@@ -19,10 +19,10 @@ const DemoRequest = () => {
 
       <div className="relative z-10 max-w-lg mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-          See Jamo in Action
+          See Jamo on a Real RFP
         </h2>
         <p className="text-muted-foreground text-base md:text-lg mb-12">
-          Request a demo and see how fast your next proposal could be.
+          We'll walk you through a live proposal build using an actual CRO RFP. 30 minutes, no pitch deck.
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4 max-w-[480px] mx-auto">

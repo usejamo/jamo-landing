@@ -2,19 +2,19 @@ import TangledWorkflow from "./TangledWorkflow";
 
 const pains = [
   {
-    before: "Building a single proposal takes ",
-    highlight: "days.",
-    support: "Scattered templates, spreadsheets, and endless back and forth across teams.",
+    before: "The ",
+    highlight: ""prompt and pray" problem.",
+    support: "Teams paste everything into a generic AI tool and hope the output is usable. It rarely is.",
   },
   {
-    before: "Bottlenecks are ",
-    highlight: "costing you deals.",
-    support: "BD waits on ops and science while sponsors are already talking to your competitors.",
+    before: "Compliance ",
+    highlight: "anxiety.",
+    support: "One missed regulatory section and the whole bid is at risk. Nobody wants to be the one who missed it.",
   },
   {
-    before: "Inconsistency is ",
-    highlight: "hurting your credibility.",
-    support: "Formatting errors and pricing mistakes on every manual proposal.",
+    before: "The ",
+    highlight: "timeline crunch.",
+    support: "Sponsors send RFPs with 2-week turnarounds and teams are still copy-pasting from the last proposal.",
   },
 ];
 

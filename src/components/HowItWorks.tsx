@@ -4,20 +4,20 @@ const steps = [
   {
     number: "01",
     icon: Upload,
-    title: "Upload Your RFP",
-    description: "Drop in the sponsor's request for proposal and Jamo gets to work instantly.",
+    title: "Upload Your Documents",
+    description: "Drop in the sponsor's RFP and any supporting documents. Jamo gets to work instantly.",
   },
   {
     number: "02",
     icon: Bot,
-    title: "Jamo Builds Your Proposal",
-    description: "Our AI generates a fully structured, accurate bid proposal tailored to the study scope.",
+    title: "Review What Jamo Extracted",
+    description: "Confirm the assumptions and requirements Jamo pulled before anything is drafted. Jamo shows its work before it writes—so you're never flying blind.",
   },
   {
     number: "03",
     icon: Send,
-    title: "Review and Send",
-    description: "Make any final edits and deliver a polished proposal to your sponsor in minutes.",
+    title: "Export Your Draft",
+    description: "Get a sponsor-ready proposal draft you can refine, approve, and send.",
   },
 ];
 
