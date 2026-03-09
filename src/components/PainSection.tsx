@@ -3,7 +3,7 @@ import TangledWorkflow from "./TangledWorkflow";
 const pains = [
   {
     before: "The ",
-    highlight: ""prompt and pray" problem.",
+    highlight: '"prompt and pray" problem.',
     support: "Teams paste everything into a generic AI tool and hope the output is usable. It rarely is.",
   },
   {
