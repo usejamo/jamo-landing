@@ -7,7 +7,7 @@ const navLinks = [
   { label: "Request a Demo", href: "#demo" },
 ];
 
-const handleScroll = (e: React.MouseEvent<HTMLAnchorElement | HTMLElement>, href: string) => {
+const handleScroll = (e: React.MouseEvent, href: string) => {
   e.preventDefault();
   const el = document.querySelector(href);
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
