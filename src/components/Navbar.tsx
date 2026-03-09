@@ -1,4 +1,5 @@
 import jamoIcon from "@/assets/jamo-icon.png";
+import MagneticButton from "./MagneticButton";
 
 const navLinks = [
   { label: "The Problem", href: "#the-problem" },
@@ -6,7 +7,7 @@ const navLinks = [
   { label: "Request a Demo", href: "#demo" },
 ];
 
-const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+const handleScroll = (e: React.MouseEvent<HTMLAnchorElement | HTMLElement>, href: string) => {
   e.preventDefault();
   const el = document.querySelector(href);
   if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -31,21 +32,23 @@ const Navbar = () => {
               key={link.href}
               href={link.href}
               onClick={(e) => handleScroll(e, link.href)}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+              className="group relative text-sm text-muted-foreground hover:text-primary transition-colors duration-200 pb-0.5"
             >
               {link.label}
+              <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-primary rounded-full transition-all duration-200 ease-out group-hover:w-full" />
             </a>
           ))}
         </div>
 
         {/* CTA */}
-        <a
+        <MagneticButton
+          as="a"
           href="#demo"
           onClick={(e) => handleScroll(e, "#demo")}
           className="bg-coral text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:brightness-90"
         >
           Request a Demo
-        </a>
+        </MagneticButton>
       </div>
     </nav>
   );

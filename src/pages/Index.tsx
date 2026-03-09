@@ -4,10 +4,12 @@ import PainSection from "@/components/PainSection";
 import HowItWorks from "@/components/HowItWorks";
 import DemoRequest from "@/components/DemoRequest";
 import Footer from "@/components/Footer";
+import CursorGlow from "@/components/CursorGlow";
 
 const Index = () => {
   return (
-    <main>
+    <main className="relative">
+      <CursorGlow />
       <Navbar />
       <HeroSection />
       <PainSection />
