@@ -35,7 +35,7 @@ const HeroSection = () => {
         >
           <a
             href="#demo"
-            className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg text-base font-semibold transition-all duration-300 hover:brightness-110 hover:scale-[1.02] glow-coral"
+            className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg text-base font-semibold transition-all duration-150 hover:brightness-[0.85] hover:scale-[1.03] active:scale-[0.97] glow-coral"
           >
             Request a Demo
           </a>

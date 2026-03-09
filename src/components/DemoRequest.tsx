@@ -52,7 +52,7 @@ const DemoRequest = () => {
           />
           <button
             type="submit"
-            className="w-full bg-primary text-primary-foreground py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 hover:brightness-90 mt-2"
+            className="w-full bg-primary text-primary-foreground py-3.5 rounded-lg text-sm font-semibold transition-all duration-150 hover:brightness-[0.85] hover:scale-[1.03] active:scale-[0.97] mt-2"
           >
             Request a Demo
           </button>
