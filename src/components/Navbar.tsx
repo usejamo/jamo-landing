@@ -1,5 +1,4 @@
 import jamoIcon from "@/assets/jamo-icon.png";
-import MagneticButton from "./MagneticButton";
 
 const navLinks = [
   { label: "The Problem", href: "#the-problem" },
@@ -17,7 +16,6 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-foreground/[0.08] bg-background/70 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
         <a href="#hero" onClick={(e) => handleScroll(e, "#hero")} className="flex items-center cursor-pointer" style={{ gap: "4px" }}>
           <img src={jamoIcon} alt="Jamo icon" className="h-11 w-auto" />
           <span className="text-2xl font-semibold text-foreground" style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.07em" }}>
@@ -25,7 +23,6 @@ const Navbar = () => {
           </span>
         </a>
 
-        {/* Nav Links - hidden on mobile */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
@@ -40,15 +37,13 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* CTA */}
-        <MagneticButton
-          as="a"
+        <a
           href="#demo"
           onClick={(e) => handleScroll(e, "#demo")}
-          className="bg-coral text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:brightness-90"
+          className="bg-primary text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:brightness-90"
         >
           Request a Demo
-        </MagneticButton>
+        </a>
       </div>
     </nav>
   );

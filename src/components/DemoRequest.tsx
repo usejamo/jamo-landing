@@ -1,5 +1,4 @@
 import { useState } from "react";
-import MagneticButton from "./MagneticButton";
 
 const DemoRequest = () => {
   const [form, setForm] = useState({ name: "", email: "", company: "" });
@@ -11,7 +10,6 @@ const DemoRequest = () => {
 
   return (
     <section id="demo" className="relative bg-background py-24 md:py-32 overflow-hidden scroll-mt-16">
-      {/* Coral glow behind header */}
       <div
         className="absolute top-16 left-1/2 -translate-x-1/2 w-[400px] h-[200px] rounded-full pointer-events-none"
         style={{
@@ -20,7 +18,6 @@ const DemoRequest = () => {
       />
 
       <div className="relative z-10 max-w-lg mx-auto px-6 text-center">
-        {/* Header */}
         <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
           See Jamo in Action
         </h2>
@@ -28,7 +25,6 @@ const DemoRequest = () => {
           Request a demo and see how fast your next proposal could be.
         </p>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4 max-w-[480px] mx-auto">
           <input
             type="text"
@@ -54,11 +50,12 @@ const DemoRequest = () => {
             className="w-full px-4 py-3.5 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:border-primary transition-colors"
             required
           />
-          <MagneticButton
+          <button
+            type="submit"
             className="w-full bg-primary text-primary-foreground py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 hover:brightness-90 mt-2"
           >
             Request a Demo
-          </MagneticButton>
+          </button>
         </form>
       </div>
     </section>
