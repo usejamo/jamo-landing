@@ -1,13 +1,4 @@
-import { useState } from "react";
-
 const DemoRequest = () => {
-  const [form, setForm] = useState({ name: "", email: "", company: "" });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Demo request:", form);
-  };
-
   return (
     <section id="demo" className="relative bg-background py-24 md:py-32 overflow-hidden scroll-mt-16">
       <div
@@ -25,28 +16,30 @@ const DemoRequest = () => {
           We'll walk you through a live proposal build using an actual CRO RFP. 30 minutes, no pitch deck.
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4 max-w-[480px] mx-auto">
+        <form 
+          action="https://formspree.io/f/xdawaawe" 
+          method="POST" 
+          className="space-y-4 max-w-[480px] mx-auto"
+        >
+          <input type="hidden" name="_next" value="https://usejamo.com/thank-you" />
           <input
             type="text"
+            name="name"
             placeholder="First and Last Name"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
             className="w-full px-4 py-3.5 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:border-primary transition-colors"
             required
           />
           <input
             type="email"
+            name="email"
             placeholder="Work Email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
             className="w-full px-4 py-3.5 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:border-primary transition-colors"
             required
           />
           <input
             type="text"
+            name="company"
             placeholder="Company Name"
-            value={form.company}
-            onChange={(e) => setForm({ ...form, company: e.target.value })}
             className="w-full px-4 py-3.5 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:border-primary transition-colors"
             required
           />
