@@ -40,7 +40,7 @@ const Navbar = () => {
         <a
           href="#demo"
           onClick={(e) => handleScroll(e, "#demo")}
-          className="bg-primary text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-150 hover:brightness-[0.85] hover:scale-[1.03] active:scale-[0.97]"
+          className="bg-primary text-primary-foreground px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-150 hover:brightness-[1.15] hover:scale-[1.03] active:scale-[0.97]"
         >
           Request a Demo
         </a>
