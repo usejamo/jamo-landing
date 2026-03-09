@@ -3,7 +3,7 @@ import jamoIcon from "@/assets/jamo-icon.png";
 const navLinks = [
   { label: "The Problem", href: "#the-problem" },
   { label: "How it Works", href: "#how-it-works" },
-  { label: "Request a Demo", href: "#demo" },
+  { label: "Why Jamo", href: "#why-jamo" },
 ];
 
 const handleScroll = (e: React.MouseEvent, href: string) => {
