@@ -1,11 +1,11 @@
 import { useState } from "react";
+import MagneticButton from "./MagneticButton";
 
 const DemoRequest = () => {
   const [form, setForm] = useState({ name: "", email: "", company: "" });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: wire up form submission
     console.log("Demo request:", form);
   };
 
@@ -54,12 +54,11 @@ const DemoRequest = () => {
             className="w-full px-4 py-3.5 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:border-primary transition-colors"
             required
           />
-          <button
-            type="submit"
+          <MagneticButton
             className="w-full bg-primary text-primary-foreground py-3.5 rounded-lg text-sm font-semibold transition-all duration-200 hover:brightness-90 mt-2"
           >
             Request a Demo
-          </button>
+          </MagneticButton>
         </form>
       </div>
     </section>

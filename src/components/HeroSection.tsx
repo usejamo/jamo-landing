@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import FluidBackground from "./FluidBackground";
+import MagneticButton from "./MagneticButton";
 
 const HeroSection = () => {
   return (
@@ -37,9 +38,9 @@ const HeroSection = () => {
           transition={{ duration: 0.7, delay: 0.6 }}
           className="mt-10"
         >
-          <button className="bg-coral text-primary-foreground px-8 py-4 rounded-lg text-base font-semibold transition-all duration-300 hover:brightness-110 hover:scale-[1.02] glow-coral">
+          <MagneticButton className="bg-coral text-primary-foreground px-8 py-4 rounded-lg text-base font-semibold transition-all duration-300 hover:brightness-110 hover:scale-[1.02] glow-coral">
             Request a Demo
-          </button>
+          </MagneticButton>
         </motion.div>
       </div>
 

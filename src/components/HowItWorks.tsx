@@ -36,8 +36,11 @@ const HowItWorks = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
           {steps.map((step) => (
-            <div key={step.number} className="flex flex-col items-center text-center relative">
-              <div className="relative z-10 w-28 h-28 rounded-2xl bg-secondary flex flex-col items-center justify-center mb-6 border border-border">
+            <div
+              key={step.number}
+              className="flex flex-col items-center text-center relative group"
+            >
+              <div className="relative z-10 w-28 h-28 rounded-2xl bg-secondary flex flex-col items-center justify-center mb-6 border border-border transition-all duration-300 ease-out group-hover:-translate-y-1 group-hover:shadow-[0_8px_30px_-8px_hsl(0_100%_71%/0.15)] group-hover:border-primary/30">
                 <span className="text-xs font-semibold text-primary tracking-widest mb-1">
                   {step.number}
                 </span>
