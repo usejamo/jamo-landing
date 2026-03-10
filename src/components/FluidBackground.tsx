@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useMemo, useEffect, useState, useRef, useCallback } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface NodeData {
   id: number;
@@ -59,6 +60,8 @@ const NetworkNode = ({
         left: useTransform(x, (v) => `${v}%`),
         top: useTransform(y, (v) => `${v}%`),
         boxShadow: node.size > 3 ? `0 0 8px ${node.color}` : undefined,
+        willChange: "transform",
+        transform: "translateZ(0)",
       }}
       animate={{ opacity: visible ? [0, 0.8, 0.8] : [0.8, 0, 0] }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
@@ -67,8 +70,11 @@ const NetworkNode = ({
 };
 
 const FluidBackground = () => {
+  const isMobile = useIsMobile();
+  const nodeCount = isMobile ? 30 : 60;
+
   const nodes = useMemo<NodeData[]>(() => {
-    return Array.from({ length: 60 }, (_, i) => ({
+    return Array.from({ length: nodeCount }, (_, i) => ({
       id: i,
       startX: 5 + Math.random() * 90,
       startY: 10 + Math.random() * 80,
@@ -78,7 +84,7 @@ const FluidBackground = () => {
       driftX: 2 + Math.random() * 4,
       driftY: 2 + Math.random() * 4,
     }));
-  }, []);
+  }, [nodeCount]);
 
   // Track which dots are currently visible
   const [visibleSet, setVisibleSet] = useState<Set<number>>(() => {
@@ -121,13 +127,14 @@ const FluidBackground = () => {
     posRef.current[id] = { x, y };
   }, []);
 
-  // Sync positions to state at 15fps for SVG rendering
+  // Sync positions to state — 15fps desktop, ~8fps mobile
+  const syncInterval = isMobile ? 133 : 66;
   useEffect(() => {
     const interval = setInterval(() => {
       setPositions({ ...posRef.current });
-    }, 66);
+    }, syncInterval);
     return () => clearInterval(interval);
-  }, []);
+  }, [syncInterval]);
 
   // Random connections that appear and disappear
   const connIdRef = useRef(0);
@@ -166,8 +173,9 @@ const FluidBackground = () => {
       }, duration * 1000);
     };
 
-    const interval = setInterval(spawnConnection, 400);
-    for (let i = 0; i < 8; i++) setTimeout(spawnConnection, i * 200);
+    const interval = setInterval(spawnConnection, isMobile ? 800 : 400);
+    const initialCount = isMobile ? 4 : 8;
+    for (let i = 0; i < initialCount; i++) setTimeout(spawnConnection, i * 200);
 
     return () => clearInterval(interval);
   }, [visibleSet]);
