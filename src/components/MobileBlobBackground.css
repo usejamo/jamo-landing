@@ -1,0 +1,56 @@
+.mobile-blob {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.mobile-blob--coral {
+  width: 340px;
+  height: 340px;
+  top: 5%;
+  left: 30%;
+  background: hsl(0 100% 71% / 0.22);
+  filter: blur(60px);
+  animation: blob-drift-1 10s ease-in-out infinite;
+}
+
+.mobile-blob--indigo {
+  width: 300px;
+  height: 300px;
+  top: 35%;
+  left: 5%;
+  background: hsl(245 60% 55% / 0.20);
+  filter: blur(55px);
+  animation: blob-drift-2 12s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+.mobile-blob--teal {
+  width: 280px;
+  height: 280px;
+  top: 55%;
+  right: 5%;
+  background: hsl(180 40% 45% / 0.20);
+  filter: blur(50px);
+  animation: blob-drift-3 8s ease-in-out infinite;
+  animation-delay: -2s;
+}
+
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(15%, 10%) scale(1.08); }
+  66% { transform: translate(-10%, 5%) scale(0.95); }
+}
+
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(10%, -12%) scale(1.1); }
+  66% { transform: translate(-8%, 8%) scale(0.92); }
+}
+
+@keyframes blob-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-12%, -8%) scale(1.05); }
+  66% { transform: translate(8%, 12%) scale(0.97); }
+}

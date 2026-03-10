@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useMemo, useEffect, useState, useRef, useCallback } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import MobileBlobBackground from "./MobileBlobBackground";
 
 interface NodeData {
   id: number;
@@ -69,12 +70,9 @@ const NetworkNode = ({
   );
 };
 
-const FluidBackground = () => {
-  const isMobile = useIsMobile();
-  const nodeCount = isMobile ? 30 : 60;
-
+const DesktopFluidBackground = () => {
   const nodes = useMemo<NodeData[]>(() => {
-    return Array.from({ length: nodeCount }, (_, i) => ({
+    return Array.from({ length: 60 }, (_, i) => ({
       id: i,
       startX: 5 + Math.random() * 90,
       startY: 10 + Math.random() * 80,
@@ -84,21 +82,18 @@ const FluidBackground = () => {
       driftX: 2 + Math.random() * 4,
       driftY: 2 + Math.random() * 4,
     }));
-  }, [nodeCount]);
+  }, []);
 
-  // Track which dots are currently visible
   const [visibleSet, setVisibleSet] = useState<Set<number>>(() => {
     const s = new Set<number>();
     nodes.forEach((n) => { if (Math.random() > 0.3) s.add(n.id); });
     return s;
   });
 
-  // Random dot visibility cycling
   useEffect(() => {
     const interval = setInterval(() => {
       setVisibleSet((prev) => {
         const next = new Set(prev);
-        // Toggle 3-5 random dots each cycle
         const count = 3 + Math.floor(Math.random() * 3);
         for (let i = 0; i < count; i++) {
           const id = Math.floor(Math.random() * nodes.length);
@@ -111,7 +106,6 @@ const FluidBackground = () => {
     return () => clearInterval(interval);
   }, [nodes.length]);
 
-  // Live positions for connections
   const posRef = useRef<Record<number, { x: number; y: number }>>({});
   const [positions, setPositions] = useState<Record<number, { x: number; y: number }>>(() => {
     const init: Record<number, { x: number; y: number }> = {};
@@ -127,16 +121,13 @@ const FluidBackground = () => {
     posRef.current[id] = { x, y };
   }, []);
 
-  // Sync positions to state — 15fps desktop, ~8fps mobile
-  const syncInterval = isMobile ? 133 : 66;
   useEffect(() => {
     const interval = setInterval(() => {
       setPositions({ ...posRef.current });
-    }, syncInterval);
+    }, 66);
     return () => clearInterval(interval);
-  }, [syncInterval]);
+  }, []);
 
-  // Random connections that appear and disappear
   const connIdRef = useRef(0);
   const [connections, setConnections] = useState<Connection[]>([]);
 
@@ -144,13 +135,9 @@ const FluidBackground = () => {
     const spawnConnection = () => {
       const visibleIds = Array.from(visibleSet);
       if (visibleIds.length < 2) return;
-
-      // Pick a random visible dot
       const fromId = visibleIds[Math.floor(Math.random() * visibleIds.length)];
       const fromPos = posRef.current[fromId];
       if (!fromPos) return;
-
-      // Find nearby visible dots (within 15% screen distance)
       const nearby = visibleIds.filter((id) => {
         if (id === fromId) return false;
         const p = posRef.current[id];
@@ -159,90 +146,48 @@ const FluidBackground = () => {
         const dy = fromPos.y - p.y;
         return Math.sqrt(dx * dx + dy * dy) < 15;
       });
-
       if (nearby.length === 0) return;
       const toId = nearby[Math.floor(Math.random() * nearby.length)];
-
       const duration = 2;
       const id = connIdRef.current++;
-
       setConnections((prev) => [...prev, { id, from: fromId, to: toId, duration }]);
-
       setTimeout(() => {
         setConnections((prev) => prev.filter((c) => c.id !== id));
       }, duration * 1000);
     };
 
-    const interval = setInterval(spawnConnection, isMobile ? 800 : 400);
-    const initialCount = isMobile ? 4 : 8;
-    for (let i = 0; i < initialCount; i++) setTimeout(spawnConnection, i * 200);
-
+    const interval = setInterval(spawnConnection, 400);
+    for (let i = 0; i < 8; i++) setTimeout(spawnConnection, i * 200);
     return () => clearInterval(interval);
   }, [visibleSet]);
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      {/* Large coral blob */}
       <motion.div
         className="absolute w-[800px] h-[800px] rounded-full opacity-[0.22]"
-        style={{
-          background: "radial-gradient(circle, hsl(0 100% 71%) 0%, transparent 70%)",
-          filter: "blur(40px)",
-        }}
-        animate={{
-          top: ["-5%", "10%", "0%", "15%", "-5%"],
-          left: ["35%", "55%", "40%", "50%", "35%"],
-          scale: [1, 1.15, 0.95, 1.1, 1],
-        }}
+        style={{ background: "radial-gradient(circle, hsl(0 100% 71%) 0%, transparent 70%)", filter: "blur(40px)" }}
+        animate={{ top: ["-5%", "10%", "0%", "15%", "-5%"], left: ["35%", "55%", "40%", "50%", "35%"], scale: [1, 1.15, 0.95, 1.1, 1] }}
         transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
       />
-
-      {/* Secondary blue blob */}
       <motion.div
         className="absolute w-[600px] h-[600px] rounded-full opacity-[0.15]"
-        style={{
-          background: "radial-gradient(circle, hsl(220 80% 60%) 0%, transparent 70%)",
-          filter: "blur(30px)",
-        }}
-        animate={{
-          top: ["20%", "35%", "15%", "40%", "20%"],
-          left: ["15%", "30%", "10%", "25%", "15%"],
-          scale: [1, 1.2, 1.05, 1.15, 1],
-        }}
+        style={{ background: "radial-gradient(circle, hsl(220 80% 60%) 0%, transparent 70%)", filter: "blur(30px)" }}
+        animate={{ top: ["20%", "35%", "15%", "40%", "20%"], left: ["15%", "30%", "10%", "25%", "15%"], scale: [1, 1.2, 1.05, 1.15, 1] }}
         transition={{ duration: 50, repeat: Infinity, ease: "easeInOut" }}
       />
-
-      {/* Third warm blob */}
       <motion.div
         className="absolute w-[500px] h-[500px] rounded-full opacity-[0.14]"
-        style={{
-          background: "radial-gradient(circle, hsl(350 80% 65%) 0%, transparent 70%)",
-          filter: "blur(30px)",
-        }}
-        animate={{
-          top: ["50%", "35%", "55%", "40%", "50%"],
-          right: ["5%", "20%", "10%", "25%", "5%"],
-          scale: [1, 1.25, 0.9, 1.2, 1],
-        }}
+        style={{ background: "radial-gradient(circle, hsl(350 80% 65%) 0%, transparent 70%)", filter: "blur(30px)" }}
+        animate={{ top: ["50%", "35%", "55%", "40%", "50%"], right: ["5%", "20%", "10%", "25%", "5%"], scale: [1, 1.25, 0.9, 1.2, 1] }}
         transition={{ duration: 45, repeat: Infinity, ease: "easeInOut" }}
       />
-
-      {/* Fourth accent blob */}
       <motion.div
         className="absolute w-[400px] h-[400px] rounded-full opacity-[0.08]"
-        style={{
-          background: "radial-gradient(circle, hsl(190 70% 55%) 0%, transparent 70%)",
-          filter: "blur(25px)",
-        }}
-        animate={{
-          top: ["60%", "45%", "65%", "50%", "60%"],
-          left: ["55%", "70%", "60%", "45%", "55%"],
-          scale: [1, 1.3, 1, 1.2, 1],
-        }}
+        style={{ background: "radial-gradient(circle, hsl(190 70% 55%) 0%, transparent 70%)", filter: "blur(25px)" }}
+        animate={{ top: ["60%", "45%", "65%", "50%", "60%"], left: ["55%", "70%", "60%", "45%", "55%"], scale: [1, 1.3, 1, 1.2, 1] }}
         transition={{ duration: 38, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      {/* Live random connection lines */}
       <svg className="absolute inset-0 w-full h-full" style={{ pointerEvents: "none" }}>
         {connections.map((conn) => {
           const p1 = positions[conn.from];
@@ -251,12 +196,8 @@ const FluidBackground = () => {
           return (
             <motion.line
               key={conn.id}
-              x1={`${p1.x}%`}
-              y1={`${p1.y}%`}
-              x2={`${p2.x}%`}
-              y2={`${p2.y}%`}
-              stroke="hsl(0 100% 71% / 0.18)"
-              strokeWidth="1"
+              x1={`${p1.x}%`} y1={`${p1.y}%`} x2={`${p2.x}%`} y2={`${p2.y}%`}
+              stroke="hsl(0 100% 71% / 0.18)" strokeWidth="1"
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 0.5, 0.3, 0] }}
               transition={{ duration: conn.duration, ease: "easeInOut" }}
@@ -265,27 +206,29 @@ const FluidBackground = () => {
         })}
       </svg>
 
-      {/* Animated nodes */}
       {nodes.map((node) => (
-        <NetworkNode
-          key={node.id}
-          node={node}
-          visible={visibleSet.has(node.id)}
-          onPositionUpdate={handlePositionUpdate}
-        />
+        <NetworkNode key={node.id} node={node} visible={visibleSet.has(node.id)} onPositionUpdate={handlePositionUpdate} />
       ))}
 
-      {/* Subtle grid overlay */}
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: `linear-gradient(hsl(0 0% 100% / 0.1) 1px, transparent 1px),
-                            linear-gradient(90deg, hsl(0 0% 100% / 0.1) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(hsl(0 0% 100% / 0.1) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 100% / 0.1) 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
         }}
       />
     </div>
   );
+};
+
+const FluidBackground = () => {
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return <MobileBlobBackground />;
+  }
+
+  return <DesktopFluidBackground />;
 };
 
 export default FluidBackground;
