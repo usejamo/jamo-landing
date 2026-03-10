@@ -6,7 +6,7 @@ const CursorGlow = () => {
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       if (glowRef.current) {
-        glowRef.current.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`;
+        glowRef.current.style.transform = `translate(${e.clientX - 125}px, ${e.clientY - 125}px)`;
       }
     };
     window.addEventListener("mousemove", onMove);
@@ -20,8 +20,8 @@ const CursorGlow = () => {
         position: "fixed",
         top: 0,
         left: 0,
-        width: 500,
-        height: 500,
+        width: 250,
+        height: 250,
         borderRadius: "50%",
         background: "radial-gradient(circle, hsl(0 100% 71% / 0.10) 0%, transparent 70%)",
         pointerEvents: "none",
