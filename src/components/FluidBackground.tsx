@@ -173,8 +173,9 @@ const FluidBackground = () => {
       }, duration * 1000);
     };
 
-    const interval = setInterval(spawnConnection, 400);
-    for (let i = 0; i < 8; i++) setTimeout(spawnConnection, i * 200);
+    const interval = setInterval(spawnConnection, isMobile ? 800 : 400);
+    const initialCount = isMobile ? 4 : 8;
+    for (let i = 0; i < initialCount; i++) setTimeout(spawnConnection, i * 200);
 
     return () => clearInterval(interval);
   }, [visibleSet]);
