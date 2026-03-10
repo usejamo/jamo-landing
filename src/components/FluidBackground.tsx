@@ -84,7 +84,7 @@ const FluidBackground = () => {
       driftX: 2 + Math.random() * 4,
       driftY: 2 + Math.random() * 4,
     }));
-  }, []);
+  }, [nodeCount]);
 
   // Track which dots are currently visible
   const [visibleSet, setVisibleSet] = useState<Set<number>>(() => {
