@@ -60,6 +60,8 @@ const NetworkNode = ({
         left: useTransform(x, (v) => `${v}%`),
         top: useTransform(y, (v) => `${v}%`),
         boxShadow: node.size > 3 ? `0 0 8px ${node.color}` : undefined,
+        willChange: "transform",
+        transform: "translateZ(0)",
       }}
       animate={{ opacity: visible ? [0, 0.8, 0.8] : [0.8, 0, 0] }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
