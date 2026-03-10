@@ -127,13 +127,14 @@ const FluidBackground = () => {
     posRef.current[id] = { x, y };
   }, []);
 
-  // Sync positions to state at 15fps for SVG rendering
+  // Sync positions to state — 15fps desktop, ~8fps mobile
+  const syncInterval = isMobile ? 133 : 66;
   useEffect(() => {
     const interval = setInterval(() => {
       setPositions({ ...posRef.current });
-    }, 66);
+    }, syncInterval);
     return () => clearInterval(interval);
-  }, []);
+  }, [syncInterval]);
 
   // Random connections that appear and disappear
   const connIdRef = useRef(0);
