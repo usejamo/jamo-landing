@@ -70,8 +70,11 @@ const NetworkNode = ({
 };
 
 const FluidBackground = () => {
+  const isMobile = useIsMobile();
+  const nodeCount = isMobile ? 30 : 60;
+
   const nodes = useMemo<NodeData[]>(() => {
-    return Array.from({ length: 60 }, (_, i) => ({
+    return Array.from({ length: nodeCount }, (_, i) => ({
       id: i,
       startX: 5 + Math.random() * 90,
       startY: 10 + Math.random() * 80,
