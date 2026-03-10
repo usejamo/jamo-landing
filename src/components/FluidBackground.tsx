@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useMemo, useEffect, useState, useRef, useCallback } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface NodeData {
   id: number;
