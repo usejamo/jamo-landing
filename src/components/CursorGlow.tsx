@@ -6,7 +6,7 @@ const CursorGlow = () => {
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       if (glowRef.current) {
-        glowRef.current.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`;
+        glowRef.current.style.transform = `translate(${e.clientX - 125}px, ${e.clientY - 125}px)`;
       }
     };
     window.addEventListener("mousemove", onMove);
