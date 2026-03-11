@@ -221,13 +221,12 @@ const DesktopFluidBackground = () => {
 };
 
 const FluidBackground = () => {
-  const isMobile = useIsMobile();
-
-  if (isMobile) {
-    return <MobileBlobBackground />;
-  }
-
-  return <DesktopFluidBackground />;
+  return (
+    <>
+      <MobileBlobBackground />
+      <DesktopFluidBackground />
+    </>
+  );
 };
 
 export default FluidBackground;
