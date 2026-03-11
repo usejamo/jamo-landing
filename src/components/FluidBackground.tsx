@@ -161,7 +161,7 @@ const DesktopFluidBackground = () => {
   }, [visibleSet]);
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden desktop-fluid-bg">
       <motion.div
         className="absolute w-[800px] h-[800px] rounded-full opacity-[0.22]"
         style={{ background: "radial-gradient(circle, hsl(0 100% 71%) 0%, transparent 70%)", filter: "blur(40px)" }}
