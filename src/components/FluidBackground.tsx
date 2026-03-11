@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useMemo, useEffect, useState, useRef, useCallback } from "react";
-import MobileBlobBackground from "./MobileBlobBackground";
+import "./FluidBackground.css";
 
 interface NodeData {
   id: number;
@@ -222,14 +222,9 @@ const DesktopFluidBackground = () => {
 
 const FluidBackground = () => {
   return (
-    <>
-      <div className="desktop-only absolute inset-0">
-        <DesktopFluidBackground />
-      </div>
-      <div className="mobile-only absolute inset-0">
-        <MobileBlobBackground />
-      </div>
-    </>
+    <div className="desktop-only absolute inset-0">
+      <DesktopFluidBackground />
+    </div>
   );
 };
 
