@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useMemo, useEffect, useState, useRef, useCallback } from "react";
-import MobileBlobBackground from "./MobileBlobBackground";
+import "./FluidBackground.css";
 
 interface NodeData {
   id: number;
