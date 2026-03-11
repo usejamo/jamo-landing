@@ -1,6 +1,5 @@
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useMemo, useEffect, useState, useRef, useCallback } from "react";
-import { useIsMobile } from "@/hooks/use-mobile";
 import MobileBlobBackground from "./MobileBlobBackground";
 
 interface NodeData {
@@ -162,7 +161,7 @@ const DesktopFluidBackground = () => {
   }, [visibleSet]);
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden desktop-fluid-bg">
       <motion.div
         className="absolute w-[800px] h-[800px] rounded-full opacity-[0.22]"
         style={{ background: "radial-gradient(circle, hsl(0 100% 71%) 0%, transparent 70%)", filter: "blur(40px)" }}
@@ -222,13 +221,12 @@ const DesktopFluidBackground = () => {
 };
 
 const FluidBackground = () => {
-  const isMobile = useIsMobile();
-
-  if (isMobile) {
-    return <MobileBlobBackground />;
-  }
-
-  return <DesktopFluidBackground />;
+  return (
+    <>
+      <MobileBlobBackground />
+      <DesktopFluidBackground />
+    </>
+  );
 };
 
 export default FluidBackground;
