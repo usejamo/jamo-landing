@@ -1,9 +1,18 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CursorGlow = () => {
   const glowRef = useRef<HTMLDivElement>(null);
+  const [isDesktop, setIsDesktop] = useState(() => window.matchMedia("(min-width: 769px)").matches);
 
   useEffect(() => {
+    const mql = window.matchMedia("(min-width: 769px)");
+    const onChange = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktop) return;
     const onMove = (e: MouseEvent) => {
       if (glowRef.current) {
         glowRef.current.style.transform = `translate(${e.clientX - 125}px, ${e.clientY - 125}px)`;
@@ -11,7 +20,9 @@ const CursorGlow = () => {
     };
     window.addEventListener("mousemove", onMove);
     return () => window.removeEventListener("mousemove", onMove);
-  }, []);
+  }, [isDesktop]);
+
+  if (!isDesktop) return null;
 
   return (
     <div
