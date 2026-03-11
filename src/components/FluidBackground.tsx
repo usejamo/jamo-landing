@@ -223,8 +223,12 @@ const DesktopFluidBackground = () => {
 const FluidBackground = () => {
   return (
     <>
-      <MobileBlobBackground />
-      <DesktopFluidBackground />
+      <div className="desktop-only absolute inset-0">
+        <DesktopFluidBackground />
+      </div>
+      <div className="mobile-only absolute inset-0">
+        <MobileBlobBackground />
+      </div>
     </>
   );
 };
