@@ -1,25 +1,25 @@
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: block;
+  }
+}
+
 .mobile-blob {
   position: absolute;
   border-radius: 50%;
   will-change: transform;
   transform: translateZ(0);
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .mobile-blob {
-    display: block;
-}
-
-.desktop-fluid-bg {
-  display: block;
-}
-
-@media (max-width: 768px) {
-  .desktop-fluid-bg {
-    display: none !important;
-  }
-}
 }
 
 .mobile-blob--coral {
