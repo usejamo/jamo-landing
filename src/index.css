@@ -13,7 +13,7 @@
     --popover: 222 47% 8%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 0 100% 71%;
+    --primary: 276 66% 42%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 222 30% 14%;
@@ -22,7 +22,7 @@
     --muted: 222 20% 18%;
     --muted-foreground: 220 15% 65%;
 
-    --accent: 0 100% 71%;
+    --accent: 276 66% 42%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
@@ -30,12 +30,12 @@
 
     --border: 222 20% 16%;
     --input: 222 20% 16%;
-    --ring: 0 100% 71%;
+    --ring: 276 66% 42%;
 
     --radius: 0.5rem;
 
-    --coral: 0 100% 71%;
-    --coral-glow: 0 100% 71% / 0.25;
+    --brand: 276 66% 42%;
+    --brand-glow: 276 66% 42% / 0.25;
     --navy-deep: 222 47% 4%;
     --navy: 222 47% 6%;
     --navy-light: 222 30% 14%;
@@ -58,19 +58,19 @@
 }
 
 @layer utilities {
-  .text-coral {
-    color: hsl(var(--coral));
+  .text-brand {
+    color: hsl(var(--brand));
   }
 
-  .bg-coral {
-    background-color: hsl(var(--coral));
+  .bg-brand {
+    background-color: hsl(var(--brand));
   }
 
   .bg-navy-deep {
     background-color: hsl(var(--navy-deep));
   }
 
-  .glow-coral {
-    box-shadow: 0 0 40px hsl(var(--coral-glow)), 0 0 80px hsl(var(--coral-glow));
+  .glow-brand {
+    box-shadow: 0 0 40px hsl(var(--brand-glow)), 0 0 80px hsl(var(--brand-glow));
   }
 }
