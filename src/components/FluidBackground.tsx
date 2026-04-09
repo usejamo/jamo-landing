@@ -76,7 +76,7 @@ const DesktopFluidBackground = () => {
       startX: 5 + Math.random() * 90,
       startY: 10 + Math.random() * 80,
       size: i % 7 === 0 ? 4 : i % 4 === 0 ? 3 : 2,
-      color: i % 3 === 0 ? "hsl(0 100% 71%)" : "hsl(220 60% 70%)",
+      color: i % 3 === 0 ? "hsl(276 66% 42%)" : "hsl(220 60% 70%)",
       driftDuration: 14 + Math.random() * 10,
       driftX: 2 + Math.random() * 4,
       driftY: 2 + Math.random() * 4,
@@ -164,7 +164,7 @@ const DesktopFluidBackground = () => {
     <div className="absolute inset-0 overflow-hidden">
       <motion.div
         className="absolute w-[800px] h-[800px] rounded-full opacity-[0.22]"
-        style={{ background: "radial-gradient(circle, hsl(0 100% 71%) 0%, transparent 70%)", filter: "blur(40px)" }}
+        style={{ background: "radial-gradient(circle, hsl(276 66% 42%) 0%, transparent 70%)", filter: "blur(40px)" }}
         animate={{ top: ["-5%", "10%", "0%", "15%", "-5%"], left: ["35%", "55%", "40%", "50%", "35%"], scale: [1, 1.15, 0.95, 1.1, 1] }}
         transition={{ duration: 40, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -176,7 +176,7 @@ const DesktopFluidBackground = () => {
       />
       <motion.div
         className="absolute w-[500px] h-[500px] rounded-full opacity-[0.14]"
-        style={{ background: "radial-gradient(circle, hsl(350 80% 65%) 0%, transparent 70%)", filter: "blur(30px)" }}
+        style={{ background: "radial-gradient(circle, hsl(276 50% 55%) 0%, transparent 70%)", filter: "blur(30px)" }}
         animate={{ top: ["50%", "35%", "55%", "40%", "50%"], right: ["5%", "20%", "10%", "25%", "5%"], scale: [1, 1.25, 0.9, 1.2, 1] }}
         transition={{ duration: 45, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -196,7 +196,7 @@ const DesktopFluidBackground = () => {
             <motion.line
               key={conn.id}
               x1={`${p1.x}%`} y1={`${p1.y}%`} x2={`${p2.x}%`} y2={`${p2.y}%`}
-              stroke="hsl(0 100% 71% / 0.18)" strokeWidth="1"
+              stroke="hsl(276 66% 42% / 0.18)" strokeWidth="1"
               initial={{ opacity: 0 }}
               animate={{ opacity: [0, 0.5, 0.3, 0] }}
               transition={{ duration: conn.duration, ease: "easeInOut" }}
