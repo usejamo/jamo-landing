@@ -15,7 +15,7 @@ const HeroSection = () => {
         >
           <span className="text-foreground">Proposals on</span>
           <br />
-          <span className="text-coral">Autopilot</span>
+          <span className="text-brand">Autopilot</span>
         </motion.h1>
 
         <motion.p
@@ -35,7 +35,7 @@ const HeroSection = () => {
         >
           <a
             href="#demo"
-            className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg text-base font-semibold transition-all duration-150 hover:brightness-[1.15] hover:scale-[1.03] active:scale-[0.97] glow-coral"
+            className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg text-base font-semibold transition-all duration-150 hover:brightness-[1.15] hover:scale-[1.03] active:scale-[0.97] glow-brand"
           >
             Request a Demo
           </a>
