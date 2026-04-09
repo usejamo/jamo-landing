@@ -7,33 +7,33 @@ const TangledWorkflow = ({ className }: { className?: string }) => (
   >
     {/* Tangled connecting lines - chaotic, overlapping, messy */}
     {/* BD Team → Ops (loops back) */}
-    <path d="M130 120 C200 80, 280 160, 350 130" stroke="hsl(0 100% 71%)" strokeWidth="1.5" opacity="0.7" />
+    <path d="M130 120 C200 80, 280 160, 350 130" stroke="hsl(276 66% 42%)" strokeWidth="1.5" opacity="0.7" />
     <path d="M130 120 C80 200, 200 250, 150 300" stroke="hsl(220 15% 45%)" strokeWidth="1.5" opacity="0.5" />
     {/* BD Team → Templates */}
-    <path d="M130 120 C160 200, 100 280, 120 380" stroke="hsl(0 100% 71%)" strokeWidth="1.5" opacity="0.6" />
+    <path d="M130 120 C160 200, 100 280, 120 380" stroke="hsl(276 66% 42%)" strokeWidth="1.5" opacity="0.6" />
     {/* Ops → Science */}
     <path d="M350 130 C400 200, 320 250, 370 310" stroke="hsl(220 15% 45%)" strokeWidth="1.5" opacity="0.5" />
     {/* Ops → Spreadsheets (messy curve) */}
-    <path d="M350 130 C420 180, 200 220, 280 380" stroke="hsl(0 100% 71%)" strokeWidth="1.5" opacity="0.5" />
+    <path d="M350 130 C420 180, 200 220, 280 380" stroke="hsl(276 66% 42%)" strokeWidth="1.5" opacity="0.5" />
     {/* Science → Email Chains */}
-    <path d="M370 310 C300 350, 350 400, 390 420" stroke="hsl(0 100% 71%)" strokeWidth="1.5" opacity="0.7" />
+    <path d="M370 310 C300 350, 350 400, 390 420" stroke="hsl(276 66% 42%)" strokeWidth="1.5" opacity="0.7" />
     {/* Templates → Spreadsheets */}
     <path d="M120 380 C180 420, 220 360, 280 380" stroke="hsl(220 15% 45%)" strokeWidth="1.5" opacity="0.5" />
     {/* Spreadsheets → BD Team (loop back!) */}
-    <path d="M280 380 C220 300, 100 280, 130 120" stroke="hsl(0 100% 71%)" strokeWidth="1.2" opacity="0.35" strokeDasharray="6 4" />
+    <path d="M280 380 C220 300, 100 280, 130 120" stroke="hsl(276 66% 42%)" strokeWidth="1.2" opacity="0.35" strokeDasharray="6 4" />
     {/* Email Chains → Ops (loop back!) */}
     <path d="M390 420 C450 350, 450 200, 350 130" stroke="hsl(220 15% 45%)" strokeWidth="1.2" opacity="0.35" strokeDasharray="6 4" />
     {/* Cross-connections creating chaos */}
-    <path d="M150 300 C250 280, 300 200, 350 130" stroke="hsl(0 100% 71%)" strokeWidth="1.5" opacity="0.4" />
-    <path d="M120 380 C200 300, 350 350, 370 310" stroke="hsl(0 100% 71%)" strokeWidth="1.5" opacity="0.45" />
+    <path d="M150 300 C250 280, 300 200, 350 130" stroke="hsl(276 66% 42%)" strokeWidth="1.5" opacity="0.4" />
+    <path d="M120 380 C200 300, 350 350, 370 310" stroke="hsl(276 66% 42%)" strokeWidth="1.5" opacity="0.45" />
     <path d="M150 300 C200 380, 250 350, 280 380" stroke="hsl(220 15% 45%)" strokeWidth="1.5" opacity="0.5" />
     <path d="M370 310 C300 280, 200 200, 130 120" stroke="hsl(220 15% 45%)" strokeWidth="1.2" opacity="0.3" />
     {/* Dead-end lines */}
-    <path d="M150 300 C180 260, 220 240, 240 230" stroke="hsl(0 100% 71%)" strokeWidth="1.5" opacity="0.5" strokeLinecap="round" />
+    <path d="M150 300 C180 260, 220 240, 240 230" stroke="hsl(276 66% 42%)" strokeWidth="1.5" opacity="0.5" strokeLinecap="round" />
     <path d="M280 380 C310 340, 340 350, 350 340" stroke="hsl(220 15% 45%)" strokeWidth="1.5" opacity="0.4" strokeLinecap="round" />
-    <path d="M370 310 C400 280, 420 290, 440 270" stroke="hsl(0 100% 71%)" strokeWidth="1.5" opacity="0.4" strokeLinecap="round" />
+    <path d="M370 310 C400 280, 420 290, 440 270" stroke="hsl(276 66% 42%)" strokeWidth="1.5" opacity="0.4" strokeLinecap="round" />
     {/* Extra tangle in the middle */}
-    <path d="M200 200 C250 180, 300 220, 280 260 C260 300, 200 280, 220 240" stroke="hsl(0 100% 71%)" strokeWidth="1.2" opacity="0.3" />
+    <path d="M200 200 C250 180, 300 220, 280 260 C260 300, 200 280, 220 240" stroke="hsl(276 66% 42%)" strokeWidth="1.2" opacity="0.3" />
     <path d="M250 300 C280 260, 320 280, 300 320 C280 360, 240 340, 260 300" stroke="hsl(220 15% 45%)" strokeWidth="1.2" opacity="0.25" />
 
     {/* Nodes */}

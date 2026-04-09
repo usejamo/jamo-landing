@@ -34,7 +34,7 @@ const CursorGlow = () => {
         width: 250,
         height: 250,
         borderRadius: "50%",
-        background: "radial-gradient(circle, hsl(0 100% 71% / 0.10) 0%, transparent 70%)",
+        background: "radial-gradient(circle, hsl(276 66% 42% / 0.10) 0%, transparent 70%)",
         pointerEvents: "none",
         zIndex: 9999,
         transition: "transform 0.1s ease-out",
