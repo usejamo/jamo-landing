@@ -21,7 +21,7 @@ const HeroSection = () => {
           transition={{ duration: 0.5, delay: 0.25 }}
           className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed"
         >
-          Jamo uses AI to turn your RFPs into sponsor-ready first drafts — in hours, not weeks.
+          Jamo turns your RFPs into sponsor-ready first drafts — in minutes, not weeks.
         </motion.p>
 
         <motion.div

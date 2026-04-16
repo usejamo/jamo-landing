@@ -9,7 +9,7 @@ const features = [
   {
     icon: Zap,
     title: "First draft in minutes",
-    description: "Go from RFP to structured proposal draft faster than your team can open a blank document.",
+    description: "Go from RFP to structured proposal draft with Jamo — faster than your team can open a blank document.",
   },
   {
     icon: Shield,
