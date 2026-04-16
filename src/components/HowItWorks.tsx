@@ -11,13 +11,13 @@ const steps = [
     number: "2",
     icon: Sparkles,
     title: "Jamo drafts your proposal",
-    description: "AI generates a tailored first draft, structured to match what sponsors expect to see.",
+    description: "Jamo generates a tailored first draft, structured to match what sponsors expect to see.",
   },
   {
     number: "3",
     icon: Send,
-    title: "Review, refine, send",
-    description: "Your team edits and polishes — not writes from scratch. Then hit send with confidence.",
+    title: "Refine it together",
+    description: "Work with Jamo section by section — adjust, ask for alternatives, and iterate until every part is right. It's a conversation, not a handoff.",
   },
 ];
 

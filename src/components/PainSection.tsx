@@ -4,14 +4,15 @@ const oldWay = [
   "Writing proposals from scratch every time",
   "Copy-pasting from old bids and hoping it fits",
   "Inconsistent quality across your team",
-  "Hours (or days) lost on every RFP response",
+  "Days (or weeks) lost on every RFP response",
 ];
 
 const jamoWay = [
-  "AI drafts your proposal from the RFP",
+  "Jamo drafts your proposal from your RFP, scope documents, or any uploaded context",
   "Consistent structure, every time",
   "Your team reviews and refines — not writes",
-  "First draft in hours, not weeks",
+  "First draft in minutes, not weeks",
+  "Grounded in official regulatory and industry guidance — not the open internet",
 ];
 
 const PainSection = () => {
@@ -23,7 +24,7 @@ const PainSection = () => {
             Stop writing proposals the hard way
           </h2>
           <p className="mt-3 text-muted-foreground text-lg max-w-2xl mx-auto">
-            Your team shouldn't spend weeks on what AI can draft in hours.
+            Your team shouldn't spend weeks on what Jamo can draft in minutes.
           </p>
         </div>
 
