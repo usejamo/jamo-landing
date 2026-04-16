@@ -1,54 +1,66 @@
-import TangledWorkflow from "./TangledWorkflow";
+import { X, Check } from "lucide-react";
 
-const pains = [
-  {
-    before: "The ",
-    highlight: '"prompt and pray" problem.',
-    support: "Teams paste everything into a generic AI tool and hope the output is usable. It rarely is.",
-  },
-  {
-    before: "Compliance ",
-    highlight: "anxiety.",
-    support: "One missed regulatory section and the whole bid is at risk. Nobody wants to be the one who missed it.",
-  },
-  {
-    before: "The ",
-    highlight: "timeline crunch.",
-    support: "Sponsors send RFPs with 2-week turnarounds and teams are still copy-pasting from the last proposal.",
-  },
+const oldWay = [
+  "Writing proposals from scratch every time",
+  "Copy-pasting from old bids and hoping it fits",
+  "Inconsistent quality across your team",
+  "Hours (or days) lost on every RFP response",
+];
+
+const jamoWay = [
+  "AI drafts your proposal from the RFP",
+  "Consistent structure, every time",
+  "Your team reviews and refines — not writes",
+  "First draft in hours, not weeks",
 ];
 
 const PainSection = () => {
   return (
-    <section id="the-problem" className="relative bg-background py-24 md:py-32 scroll-mt-16">
-      {/* Header */}
-      <div className="text-center mb-16 md:mb-20">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-          The Old Way is Broken
-        </h2>
-        <div className="w-12 h-1 bg-primary rounded-full mx-auto" />
-      </div>
-
-      {/* Two-column layout */}
-      <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-        {/* Left: pain statements */}
-        <div className="space-y-12 md:space-y-16">
-          {pains.map((pain, i) => (
-            <div key={i}>
-              <p className="text-xl sm:text-2xl md:text-[1.7rem] font-bold leading-snug text-foreground">
-                {pain.before}
-                <span className="text-primary">{pain.highlight}</span>
-              </p>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed max-w-md">
-                {pain.support}
-              </p>
-            </div>
-          ))}
+    <section id="the-problem" className="py-20 md:py-28 bg-background scroll-mt-16">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="text-center mb-14">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+            Stop writing proposals the hard way
+          </h2>
+          <p className="mt-3 text-muted-foreground text-lg max-w-2xl mx-auto">
+            Your team shouldn't spend weeks on what AI can draft in hours.
+          </p>
         </div>
 
-        {/* Right: tangled workflow SVG */}
-        <div className="flex items-center justify-center md:justify-end order-last">
-          <TangledWorkflow className="w-full max-w-md" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {/* Old way */}
+          <div className="rounded-2xl border border-border bg-muted/50 p-8">
+            <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-6">
+              The old way
+            </p>
+            <ul className="space-y-4">
+              {oldWay.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-destructive/10 flex items-center justify-center">
+                    <X className="w-3 h-3 text-destructive" />
+                  </span>
+                  <span className="text-foreground text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Jamo way */}
+          <div className="rounded-2xl border border-primary/20 bg-brand-light p-8">
+            <p className="text-sm font-semibold text-brand uppercase tracking-wider mb-6">
+              The Jamo way
+            </p>
+            <ul className="space-y-4">
+              {jamoWay.map((item) => (
+                <li key={item} className="flex items-start gap-3">
+                  <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Check className="w-3 h-3 text-primary" />
+                  </span>
+                  <span className="text-foreground text-sm leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>

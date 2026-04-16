@@ -2,43 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 @layer base {
   :root {
-    --background: 222 47% 6%;
-    --foreground: 0 0% 100%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
 
-    --card: 222 47% 8%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
 
-    --popover: 222 47% 8%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
 
-    --primary: 276 66% 42%;
+    --primary: 276 78% 42%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 222 30% 14%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 270 50% 97%;
+    --secondary-foreground: 0 0% 9%;
 
-    --muted: 222 20% 18%;
-    --muted-foreground: 220 15% 65%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
 
-    --accent: 276 66% 42%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 270 50% 97%;
+    --accent-foreground: 0 0% 9%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 222 20% 16%;
-    --input: 222 20% 16%;
-    --ring: 276 66% 42%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 276 78% 42%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --brand: 276 66% 42%;
-    --brand-glow: 276 66% 42% / 0.25;
-    --navy-deep: 222 47% 4%;
-    --navy: 222 47% 6%;
-    --navy-light: 222 30% 14%;
+    --brand: 276 78% 42%;
+    --brand-light: 270 60% 96%;
   }
 }
 
@@ -53,7 +52,7 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 }
 
@@ -66,11 +65,7 @@
     background-color: hsl(var(--brand));
   }
 
-  .bg-navy-deep {
-    background-color: hsl(var(--navy-deep));
-  }
-
-  .glow-brand {
-    box-shadow: 0 0 40px hsl(var(--brand-glow)), 0 0 80px hsl(var(--brand-glow));
+  .bg-brand-light {
+    background-color: hsl(var(--brand-light));
   }
 }
