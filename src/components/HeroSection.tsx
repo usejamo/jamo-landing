@@ -1,53 +1,52 @@
 import { motion } from "framer-motion";
-import FluidBackground from "./FluidBackground";
 
 const HeroSection = () => {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
-      <FluidBackground />
-
-      <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
+    <section id="hero" className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-background">
+      <div className="max-w-3xl mx-auto px-6 text-center">
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.1] tracking-tight"
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[1.08] tracking-tight"
         >
           <span className="text-foreground">Proposals on</span>
           <br />
-          <span className="text-brand">Autopilot</span>
+          <span className="text-brand">Autopilot.</span>
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-        className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto leading-relaxed"
         >
-          CROs lose weeks to manual proposal work on every RFP that comes in. Jamo uses AI to get you to a sponsor-ready draft in hours, not weeks.
+          Jamo turns your RFPs into sponsor-ready first drafts — in minutes, not weeks.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6 }}
-          className="mt-10"
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-8"
         >
           <a
             href="#demo"
-            className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-lg text-base font-semibold transition-all duration-150 hover:brightness-[1.15] hover:scale-[1.03] active:scale-[0.97] glow-brand"
+            className="inline-block bg-primary text-primary-foreground px-8 py-3.5 rounded-lg text-base font-medium transition-all duration-150 hover:opacity-90 active:scale-[0.97]"
           >
-            Request a Demo
+            Get Early Access
           </a>
         </motion.div>
-      </div>
 
-      <div
-        className="absolute bottom-0 left-0 right-0 h-48 pointer-events-none"
-        style={{
-          background: "linear-gradient(to bottom, transparent, hsl(222 47% 6%))",
-        }}
-      />
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.55 }}
+          className="mt-4 text-sm text-muted-foreground"
+        >
+          Built for CRO business development and proposals teams.
+        </motion.p>
+      </div>
     </section>
   );
 };

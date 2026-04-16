@@ -1,54 +1,69 @@
-import { Eye, Shield, Workflow } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+import { Eye, Shield, Workflow, Zap, FileText, Users } from "lucide-react";
+import FadeIn from "./FadeIn";
 
-const reasons = [
+const features = [
   {
-    icon: Eye,
-    title: "Transparent AI",
-    description:
-      "Jamo extracts every assumption from your documents and shows them to you before drafting. You approve, edit, or override. No black boxes.",
+    icon: FileText,
+    title: "Purpose-built for CROs",
+    description: "Not a generic AI writing tool. Jamo understands clinical trial proposals, regulatory language, and sponsor expectations.",
+  },
+  {
+    icon: Zap,
+    title: "First draft in minutes",
+    description: "Go from RFP to structured proposal draft with Jamo — faster than your team can open a blank document.",
   },
   {
     icon: Shield,
-    title: "Regulatory-Aware",
-    description:
-      "Built on ICH-GCP guidelines and FDA guidance documents, not a general-purpose language model. Jamo knows what a compliant proposal actually looks like.",
+    title: "Regulatory-aware",
+    description: "Built on ICH-GCP guidelines and FDA guidance. Jamo knows what a compliant proposal looks like.",
+  },
+  {
+    icon: Eye,
+    title: "Transparent AI",
+    description: "Jamo shows its assumptions before drafting. You approve, edit, or override. No black boxes.",
   },
   {
     icon: Workflow,
-    title: "Built for CRO Workflows",
-    description:
-      "Works the way proposal managers actually work—section by section, with full control at every step.",
+    title: "Built for BD teams",
+    description: "Works the way proposal managers actually work — section by section, with full control at every step.",
+  },
+  {
+    icon: Users,
+    title: "Easy to adopt",
+    description: "No IT setup, no training required. If your team can use Google Docs, they can use Jamo.",
   },
 ];
 
 const WhyJamo = () => {
   return (
-    <section id="why-jamo" className="relative bg-background py-24 md:py-32 scroll-mt-16">
-      <div className="text-center mb-16 md:mb-20">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-          Why Jamo
-        </h2>
-        <div className="w-12 h-1 bg-primary rounded-full mx-auto" />
-      </div>
+    <section id="why-jamo" className="py-20 md:py-28 bg-background scroll-mt-16">
+      <div className="max-w-6xl mx-auto px-6">
+        <FadeIn className="text-center mb-14">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+            Why Jamo
+          </h2>
+          <p className="mt-3 text-muted-foreground text-lg max-w-2xl mx-auto">
+            We built Jamo because CRO teams deserve better than copy-paste and generic AI.
+          </p>
+        </FadeIn>
 
-      <div className="max-w-5xl mx-auto px-6">
-        {reasons.map((reason, index) => (
-          <div key={reason.title}>
-            {index > 0 && <Separator className="my-0" />}
-            <div className="grid grid-cols-1 md:grid-cols-[80px_200px_1fr] gap-6 md:gap-10 items-center py-10 md:py-12">
-              <div className="flex items-center justify-center md:justify-start">
-                <reason.icon className="text-primary" size={40} strokeWidth={1.5} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((feature, i) => (
+            <FadeIn key={feature.title} delay={0.08 * (i + 1)}>
+              <div className="rounded-2xl border border-border p-7 hover:border-primary/20 transition-colors duration-200 h-full">
+                <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                  <feature.icon className="w-5 h-5 text-primary" strokeWidth={1.5} />
+                </div>
+                <h3 className="text-base font-semibold text-foreground mb-1.5">
+                  {feature.title}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {feature.description}
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-foreground text-center md:text-left">
-                {reason.title}
-              </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed text-center md:text-left">
-                {reason.description}
-              </p>
-            </div>
-          </div>
-        ))}
+            </FadeIn>
+          ))}
+        </div>
       </div>
     </section>
   );
